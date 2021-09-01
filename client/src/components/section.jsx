@@ -8,6 +8,7 @@ import Person from './person';
 export default function Section(props) {
     const section_name = props.section_name
     const location = props.location
+    const handleProfileOpen = props.openProfile
     return (
     
        <Card>
@@ -16,11 +17,7 @@ export default function Section(props) {
          <p>{location}</p>
 
          <List>
-          <Person name='Jordan'/> 
-          <Person name='Jacob'/>
-          <Person name='Michelle'/> 
-          <Person name='Oleg'/>
-          <Person name='Nicholas'/>
+          <div>People here soon</div>
          </List>
         </Card>
     );
