@@ -1,16 +1,83 @@
 import React from 'react';
 
 // material-ui
-import { Button, Card, Grid, TextField, Dialog, Divider, DialogActions, DialogContent, DialogTitle, Typography, Autocomplete } from '@material-ui/core';
+import { Button, Card, Grid, Menu, MenuItem,  TextField, Dialog, Divider, DialogActions, DialogContent, DialogTitle, Typography, Autocomplete } from '@material-ui/core';
 
 import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
 
 // Extensions
+import UserDetailsCard from 'ui-component/cards/UserDetailsCard';
 import FormControl from 'ui-component/extended/Form/FormControl';
 import LockTwoToneIcon from '@material-ui/icons/LockTwoTone';
+
+
+import PropTypes from 'prop-types';
+
+// material-ui
+import { makeStyles } from '@material-ui/styles';
+
+// project card
+import { gridSpacing } from 'store/constant';
+
+
+// assets
+import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
+import NotInterestedTwoToneIcon from '@material-ui/icons/NotInterestedTwoTone';
+import ChatBubbleTwoToneIcon from '@material-ui/icons/ChatBubbleTwoTone';
+
+
+
+const avatarImage = require.context('assets/images/profile', true);
+
+
+// style card
+const useStyles = makeStyles((theme) => ({
+    followerBlock: {
+        padding: '16px',
+        background: theme.palette.mode === 'dark' ? theme.palette.dark.main : theme.palette.grey[50],
+        border: theme.palette.mode === 'dark' ? '1px solid transparent' : `1px solid ${theme.palette.grey[100]}`,
+        '&:hover': {
+            borderColor: theme.palette.primary.main
+        }
+    },
+    primaryLight: {
+        color: theme.palette.mode === 'dark' ? theme.palette.grey[900] : theme.palette.grey[500],
+        cursor: 'pointer'
+    },
+    btnProfile: {
+        width: '100%',
+        '&:hover ': {
+            color: '#fff'
+        },
+        '&.MuiButton-outlinedPrimary:hover ': {
+            background: theme.palette.primary.main
+        },
+        '&.MuiButton-outlinedSecondary': {
+            color: theme.palette.error.main,
+            borderColor: theme.palette.error.main
+        },
+        '&.MuiButton-outlinedSecondary:hover ': {
+            background: theme.palette.error.main,
+            color: '#fff'
+        }
+    }
+}));
+
+
 // ===============================|| UI DIALOG - SWEET ALERT ||=============================== //
 
 export default function AlertDialog({user}) {
+    const classes = useStyles();
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const handleTap = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleHide = () => {
+        setAnchorEl(null);
+    };
+
     const [open, setOpen] = React.useState(false);
     const handleClickOpen = () => {
         setOpen(true);
@@ -68,8 +135,6 @@ export default function AlertDialog({user}) {
 
     return (
         <>
-            {/* <PermContactCalendarIcon onClick={handleClickOpen} sx={{ fontSize: '1.1rem' }} />
-             */}
             <Grid onClick={handleClickOpen} item xs={12}>
                     
                     <Grid container spacing={2} alignItems="center">
@@ -85,7 +150,6 @@ export default function AlertDialog({user}) {
                    
             </Grid> 
             
-            
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -93,9 +157,125 @@ export default function AlertDialog({user}) {
                 aria-describedby="alert-dialog-description"
                 sx={{ p: 3 }}
             >
-                <DialogTitle id="alert-dialog-title">{`Details for ${user.rank} ${user.first_name} ${user.last_name}`}</DialogTitle>
+                {/* <DialogTitle id="alert-dialog-title">{`Details for ${user.rank} ${user.first_name} ${user.last_name}`}</DialogTitle> */}
                 <DialogContent>
-                    <Card><Divider/><br/></Card>
+
+
+
+                <Card className={classes.followerBlock}>
+            <Grid container spacing={gridSpacing}>
+                <Grid item xs={12}>
+                    <Grid container spacing={gridSpacing}>
+                        <Grid item xs zeroMinWidth>
+                            <Typography variant="h3" component="div">
+                                {user.rank} {user.first_name} {user.last_name}
+                            </Typography>
+                        </Grid>
+                        <Grid item>
+                              <Typography variant="caption">ID: {user.user_id} / Username: {user.username} |</Typography>
+                        </Grid>
+                        {/* <Grid item>
+                            <MoreHorizOutlinedIcon
+                                fontSize="small"
+                                className={classes.primaryLight}
+                                aria-controls="menu-user-details-card"
+                                aria-haspopup="true"
+                                onClick={handleTap}
+                            />
+                            <Menu
+                                id="menu-user-details-card"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={Boolean(anchorEl)}
+                                onClose={handleHide}
+                                variant="selectedMenu"
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'right'
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right'
+                                }}
+                            >
+                                <MenuItem onClick={handleHide}>Edit</MenuItem>
+                                <MenuItem onClick={handleHide}>Delete</MenuItem>
+                            </Menu>
+                        </Grid> */}
+                    </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    <Grid container spacing={gridSpacing}>
+                        <Grid item xs={6}>
+                            <Typography variant="caption">Organization</Typography>
+                            <Typography variant="h4">{user.organization_id}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography variant="caption">Section</Typography>
+                            <Typography variant="h4">{user.organization_id}</Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    <Grid container spacing={gridSpacing}>
+                        <Grid item xs={6}>
+                            <Typography variant="caption">AFSC</Typography>
+                            <Typography variant="h4">{user.afsc}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography variant="caption">Job Title</Typography>
+                            <Typography variant="h4">{user.job_title}</Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    <Grid container spacing={gridSpacing}>
+                        <Grid item xs={6}>
+                            <Typography variant="caption">Email</Typography>
+                            <Typography variant="h4">{user.email}</Typography>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Typography variant="caption">Cell Phone</Typography>
+                            <Typography variant="h4">{user.cell_phone}</Typography>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                    <Typography variant="caption">Home Address</Typography>
+                    <Typography variant="h4">{user.home_address}</Typography>
+                </Grid>
+                {/* <Grid item xs={12}>
+                    <Grid container spacing={1}>
+                        <Grid item xs={6}>
+                            <Button variant="outlined" className={classes.btnProfile} startIcon={<ChatBubbleTwoToneIcon />}>
+                                Edit
+                            </Button>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Button
+                                variant="outlined"
+                                color="secondary"
+                                className={classes.btnProfile}
+                                startIcon={<NotInterestedTwoToneIcon />}
+                            >
+                                Delete
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid> */}
+            </Grid>
+        </Card>
+
+
+
+
+
+
+
+
+
+
+                    {/* <Card><Divider/><br/></Card>
                   <Grid container spacing={2} columns={16}>
                       <Grid item xs={8}>
                             <TextField fullWidth 
@@ -193,7 +373,7 @@ export default function AlertDialog({user}) {
                                 disabled
                             />
                         </Grid>
-                    </Grid>
+                    </Grid> */}
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5 }}>
                     <Button onClick={handleClose} color="primary">
