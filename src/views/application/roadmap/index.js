@@ -16,7 +16,7 @@ import { gridSpacing } from 'store/constant';
 
 const Roadmap = () => (
     <>
-     <MainCard title="Project MicroM">
+     <MainCard title="Project MicroM" secondary="From Monday to Friday">
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>
                 <SubCard title="Capstone Roadmap">

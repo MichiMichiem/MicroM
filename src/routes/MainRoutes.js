@@ -11,6 +11,7 @@ const Orgchart = Loadable(lazy(() => import('views/application/orgchart')));
 const Roadmap = Loadable(lazy(() => import('views/application/roadmap')));
 
 
+const AppCalendar = Loadable(lazy(() => import('views/application/calendar')));
 
 // application - user social & account profile routing
 const AppUserSocialProfile = Loadable(lazy(() => import('views/application/users/social-profile')));
@@ -102,6 +103,10 @@ const MainRoutes = {
         {
             path: '/roadmap',
             element: <Roadmap />
+        },
+        {
+            path: '/calendar',
+            element: <AppCalendar />
         },
         {
             path: '/forms/layouts/layouts',

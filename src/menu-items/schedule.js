@@ -23,7 +23,6 @@ const schedule = {
             url: '/calendar',
             icon: icons.IconCalendarStats,
             breadcrumbs: false,
-            disabled: true
         },
         // {
         //     id: 'orgchart',
