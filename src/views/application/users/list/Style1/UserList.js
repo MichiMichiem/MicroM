@@ -121,7 +121,7 @@ const UserList = ({users}) => {
                 {userArray.map((user) => {
                     return (
                     <TableRow hover key="ID">
-                        <TableCell sx={{ pl: 3 }}>1</TableCell>
+                        <TableCell sx={{ pl: 3 }}>{user.user_id}</TableCell>
                         <TableCell>
                             <Grid container spacing={2} alignItems="center">
                                 <Grid item xs zeroMinWidth>
