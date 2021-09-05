@@ -4,16 +4,17 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 // assets
-import { IconBrandChrome } from '@tabler/icons';
+import { IconBasket, IconUserCheck, IconInfinity, IconHierarchy, IconUsers, IconMessages, IconMail, IconCalendar, IconNfc } from '@tabler/icons';
 
 // constant
-const icons = { IconBrandChrome };
+const icons = { IconUserCheck, IconInfinity, IconHierarchy, IconBasket, IconUsers, IconMessages, IconMail, IconCalendar, IconNfc };
 
 // ===========================|| SAMPLE PAGE & DOCUMENTATION MENU ITEMS ||=========================== //
 
 const other = {
-    id: 'sample-docs-roadmap',
+    id: 'devonly',
     type: 'group',
+    title: <FormattedMessage id="Development" />,
     children: [
         // {
         //     id: 'sample-page',
@@ -23,14 +24,14 @@ const other = {
         //     icon: icons.IconBrandChrome,
         //     breadcrumbs: false
         // },
-        // {
-        //     id: 'orgchart',
-        //     title: <FormattedMessage id="Organization" />,
-        //     type: 'item',
-        //     url: '/org-chart',
-        //     icon: icons.IconBrandChrome,
-        //     breadcrumbs: false
-        // },
+        {
+            id: 'roadmap',
+            title: <FormattedMessage id="Roadmap" />,
+            type: 'item',
+            url: '/roadmap',
+            icon: icons.IconInfinity,
+            breadcrumbs: false
+        }
     ]
 };
 

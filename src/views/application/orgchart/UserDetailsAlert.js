@@ -71,21 +71,18 @@ export default function AlertDialog({user}) {
             {/* <PermContactCalendarIcon onClick={handleClickOpen} sx={{ fontSize: '1.1rem' }} />
              */}
             <Grid onClick={handleClickOpen} item xs={12}>
+                    
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs zeroMinWidth>
-                            <Typography align="left" component="div" variant="subtitle1">
-                        {`${user.rank} ${user.first_name} ${user.last_name}`}
-                        </Typography>
-                        <Typography align="left" component="div" variant="subtitle2">
-                            {`${user.job_title}`}
-                        </Typography>
+                            <Typography align="center" component="div" variant="subtitle1">
+                                 {`${user.rank} ${user.first_name} ${user.last_name}`}
+                            </Typography>
+                            <Typography align="center" component="div" variant="subtitle2">
+                                {`${user.job_title}`}
+                            </Typography>
+                        </Grid>
                     </Grid>
-                    <Grid item>
-                        <Typography align="left" variant="caption">
-                        {`${user.cell_phone}`}
-                        </Typography>
-                    </Grid>
-                    </Grid>
+                   
             </Grid> 
             
             

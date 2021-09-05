@@ -2,7 +2,7 @@
     "name": "berry-material-react",
     "version": "2.0.0",
     "private": true,
-    "homepage": "https://",
+    "homepage": "https://aimassist.com",
     "dependencies": {
         "@auth0/auth0-spa-js": "^1.14.0",
         "@date-io/date-fns": "1.x",

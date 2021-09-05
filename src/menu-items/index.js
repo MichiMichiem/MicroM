@@ -1,11 +1,12 @@
 import other from './other';
-import application from './application';
+import organization from './organization';
+import schedule from './schedule';
 
 // ===========================|| MENU ITEMS ||=========================== //
 
 const menuItems = {
-    // items: [other, application]
-    items: [application]
+    // items: [other, organization]
+    items: [organization, schedule, other]
 };
 
 export default menuItems;

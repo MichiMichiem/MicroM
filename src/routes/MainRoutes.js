@@ -8,6 +8,7 @@ import AuthGuard from 'utils/route-guard/AuthGuard';
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 const Orgchart = Loadable(lazy(() => import('views/application/orgchart')));
+const Roadmap = Loadable(lazy(() => import('views/application/roadmap')));
 
 
 
@@ -97,6 +98,10 @@ const MainRoutes = {
         {
             path: '/users',
             element: <AppProfileListStyle1 />
+        },
+        {
+            path: '/roadmap',
+            element: <Roadmap />
         },
         {
             path: '/forms/layouts/layouts',

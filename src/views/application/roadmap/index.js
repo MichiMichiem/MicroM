@@ -1,24 +1,29 @@
 import React from 'react';
 
 // material-ui
-import { Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 
 // project imports
+import Timeline from './Timeline';
+
+
+import SubCard from 'ui-component/cards/SubCard';
 import MainCard from 'ui-component/cards/MainCard';
+import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
+import { gridSpacing } from 'store/constant';
 
 // ==============================|| Road Map ||============================== //
 
 const Roadmap = () => (
     <>
-    <MainCard title="Sample Card">
-        <Typography variant="body2">
-           LDASLLSDLDS
-        </Typography>
-    </MainCard>
-    <MainCard title="Sample Card">
-    <Typography variant="body2">
-       LDASLLSDLDS
-        </Typography>
+     <MainCard title="Project MicroM">
+        <Grid container spacing={gridSpacing}>
+            <Grid item xs={12}>
+                <SubCard title="Capstone Roadmap">
+                    <Timeline />
+                </SubCard>
+            </Grid>
+        </Grid>
     </MainCard>
 </>
 );
