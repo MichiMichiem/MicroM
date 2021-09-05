@@ -20,10 +20,7 @@ import {
 } from '@material-ui/core';
 
 // project imports
-import Avatar from 'ui-component/extended/Avatar';
 import axios from 'utils/axios';
-import DetailsModal from './DetailsModal';
-import EditModal from './EditModal';
 import UserDetailsAlert from './UserDetailsAlert';
 import EditUserAlert from './EditUserAlert';
 
