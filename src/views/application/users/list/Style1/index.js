@@ -34,7 +34,7 @@ const ListStylePage1 = () => {
                     <Grid item>
                         <Typography variant="h3">User List</Typography>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12} sm={4} md={4} lg={9}>
                         <OutlinedInput
                             id="input-search-list-style1"
                             placeholder="Search"

@@ -73,7 +73,7 @@ export default function AlertDialog() {
 
     return (
         <>
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button color="secondary" variant="contained" onClick={handleClickOpen}>
                 Add New User
             </Button>
             <Dialog
