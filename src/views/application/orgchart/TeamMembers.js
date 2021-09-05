@@ -14,8 +14,8 @@ import UserDetailsAlert from './UserDetailsAlert';
 import SubCard from 'ui-component/cards/SubCard';
 
 const useStyles = makeStyles((theme) => ({
-    cardd: {
-        borderColor: theme.palette.primary.light,
+    card: {
+        borderColor: theme.palette.mode === 'light' ? theme.palette.primary.light : theme.palette.primary.main,
         border: '3px solid'
     }
 }));
@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const TeamMembers = ({ title, location, section_id, userData,}) => {
     const classes = useStyles();
     return (
-    <SubCard className={classes.cardd} title={<>{title}<MuiTypography variant="subtitle1" gutterBottom>{location}</MuiTypography><MuiTypography variant="subtitle2" gutterBottom>Section ID: {section_id}</MuiTypography></>} content={false}>
+    <SubCard className={classes.card} title={<>{title}<MuiTypography variant="subtitle1" gutterBottom>{location}</MuiTypography><MuiTypography variant="subtitle2" gutterBottom>Section ID: {section_id}</MuiTypography></>} content={false}>
         <CardContent>
             <Grid container spacing={gridSpacing} alignItems="center">
                 {userData.map((user) => {

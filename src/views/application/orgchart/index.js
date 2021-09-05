@@ -43,7 +43,7 @@ const Orgchart = () => {
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={12}>
                     <MainCard>
-                    <Tree lineWidth={'3px'} lineColor={theme.palette.primary.light} label={<>
+                    <Tree lineWidth={'3px'} lineColor={(theme.palette.mode === 'light' ? theme.palette.primary.light : theme.palette.primary.main)} label={<>
                                     <MuiTypography variant="h1" gutterBottom>
                                         {OrgChartData.organization.name}
                                     </MuiTypography>
