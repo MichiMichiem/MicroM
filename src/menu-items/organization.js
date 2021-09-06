@@ -6,6 +6,8 @@ import { FormattedMessage } from 'react-intl';
 // assets
 import { IconBasket, IconUserCheck, IconInfinity, IconHierarchy, IconUsers, IconMessages, IconMail, IconCalendar, IconNfc } from '@tabler/icons';
 
+
+
 // constant
 const icons = { IconUserCheck, IconInfinity, IconHierarchy, IconBasket, IconUsers, IconMessages, IconMail, IconCalendar, IconNfc };
 
@@ -28,7 +30,7 @@ const organization = {
         },
         {
             id: 'users',
-            title: <FormattedMessage id="All Users" />,
+            title: <FormattedMessage id="Personnel" />,
             type: 'item',
             url: '/users',
             icon: icons.IconUsers,
