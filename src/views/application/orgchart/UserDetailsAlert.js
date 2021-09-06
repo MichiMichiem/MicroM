@@ -170,9 +170,10 @@ export default function AlertDialog({user}) {
                             <Typography variant="h3" component="div">
                                 {user.rank} {user.first_name} {user.last_name}
                             </Typography>
+                            <Typography variant="caption">Username: {user.username}</Typography>
                         </Grid>
                         <Grid item>
-                              <Typography variant="caption">ID: {user.user_id} / Username: {user.username} |</Typography>
+                              <Typography variant="caption">ID: {user.user_id}</Typography>
                         </Grid>
                         {/* <Grid item>
                             <MoreHorizOutlinedIcon
