@@ -5,6 +5,7 @@ import { Grid } from '@material-ui/core';
 
 // project imports
 import Timeline from './Timeline';
+import TimelineNext from './TimelineNext';
 
 
 import SubCard from 'ui-component/cards/SubCard';
@@ -19,8 +20,11 @@ const Roadmap = () => (
      <MainCard title="Project MicroM" secondary="From Monday to Friday">
         <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>
-                <SubCard title="Capstone Roadmap">
+                <SubCard title="Project Roadmap">
                     <Timeline />
+                </SubCard>
+                <SubCard title="Capstone Roadmap">
+                    <TimelineNext />
                 </SubCard>
             </Grid>
         </Grid>
