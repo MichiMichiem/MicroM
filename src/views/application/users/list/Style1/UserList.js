@@ -55,6 +55,8 @@ const useStyles = makeStyles((theme) => ({
 // ===========================|| USER LIST 1 ||=========================== //
 
 const UserList = ({users}) => {
+    
+    const [somethingChanged, setSomethingChanged] = React.useState(false)
     const theme = useTheme();
     const classes = useStyles();
     
@@ -82,6 +84,30 @@ const UserList = ({users}) => {
     React.useEffect(() => {
         getData();
     }, []);
+    
+
+
+    const users = []
+    const getData = async (users) => {
+
+        console.log('Getting the data....')
+        try {
+            const response = await fetch('http://localhost:8080/users/organization/1')
+            console.log('Got the data...', response)
+            setUserArray( await response.json())
+            console.log(users)
+        } catch (err) {
+            console.log('There was an error:', err)
+        } 
+    };
+
+    React.useEffect(() => {
+        getData();
+    }, [somethingChanged]);
+    
+    React.useEffect(() => {
+        setSomethingChanged(true)
+    }, [])
     
     
     
