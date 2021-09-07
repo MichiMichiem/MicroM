@@ -1,7 +1,7 @@
 import React from 'react';
 
 // material-ui
-import { Grid } from '@material-ui/core';
+import { Grid, Divider } from '@material-ui/core';
 
 // project imports
 import Timeline from './Timeline';
@@ -23,6 +23,7 @@ const Roadmap = () => (
                 <SubCard title="Project Roadmap">
                     <Timeline />
                 </SubCard>
+                <Divider/>
                 <SubCard title="Capstone Roadmap">
                     <TimelineNext />
                 </SubCard>

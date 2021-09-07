@@ -3,7 +3,7 @@ import React from 'react';
 // material-ui
 import { Button, Card, Grid, Menu, MenuItem,  TextField, Dialog, Divider, DialogActions, DialogContent, DialogTitle, Typography, Autocomplete } from '@material-ui/core';
 
-import PermContactCalendarIcon from '@material-ui/icons/PermContactCalendar';
+import BlockTwoToneIcon from '@material-ui/icons/BlockTwoTone';
 
 // Extensions
 import UserDetailsCard from 'ui-component/cards/UserDetailsCard';
@@ -25,10 +25,7 @@ import MoreHorizOutlinedIcon from '@material-ui/icons/MoreHorizOutlined';
 import NotInterestedTwoToneIcon from '@material-ui/icons/NotInterestedTwoTone';
 import ChatBubbleTwoToneIcon from '@material-ui/icons/ChatBubbleTwoTone';
 
-
-
 const avatarImage = require.context('assets/images/profile', true);
-
 
 // style card
 const useStyles = makeStyles((theme) => ({
@@ -62,13 +59,14 @@ const useStyles = makeStyles((theme) => ({
         }
     }
 }));
-
+var API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://sdi06-10.staging.dso.mil/api'
 
 // ===============================|| UI DIALOG - SWEET ALERT ||=============================== //
 
 export default function AlertDialog({user}) {
     const classes = useStyles();
-
+    const [deleteUserId] = React.useState(user.user_id)
+    const [deleteResponse, setDeleteResponse] = React.useState()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const handleTap = (event) => {
         setAnchorEl(event.currentTarget);
@@ -133,9 +131,21 @@ export default function AlertDialog({user}) {
     { title: 'Im FUCKING GOD'}
     ]
 
+    const handleDelete = () => {
+       
+        console.log('Attemp to delete:', deleteUserId)
+      
+          fetch(`${API_URL}/delete/user/${deleteUserId}`, {
+              method: 'Delete'
+          })
+              .then(res => res.json())
+              .then(json => setDeleteResponse(json))
+              .then(() => console.log(deleteResponse))
+              window.location.reload();
+      }
     return (
         <>
-            <PermContactCalendarIcon onClick={handleClickOpen} sx={{ fontSize: '1.1rem' }} />
+            <BlockTwoToneIcon onClick={handleClickOpen} sx={{ fontSize: '1.1rem' }} />
             
             
             <Dialog
@@ -156,41 +166,13 @@ export default function AlertDialog({user}) {
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs zeroMinWidth>
                             <Typography variant="h3" component="div">
-                                {user.rank} {user.first_name} {user.last_name}
+                            {user.rank} {user.first_name} {user.last_name}
                             </Typography>
                             <Typography variant="caption">Username: {user.username}</Typography>
                         </Grid>
                         <Grid item>
                               <Typography variant="caption">ID: {user.user_id}</Typography>
                         </Grid>
-                        {/* <Grid item>
-                            <MoreHorizOutlinedIcon
-                                fontSize="small"
-                                className={classes.primaryLight}
-                                aria-controls="menu-user-details-card"
-                                aria-haspopup="true"
-                                onClick={handleTap}
-                            />
-                            <Menu
-                                id="menu-user-details-card"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleHide}
-                                variant="selectedMenu"
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'right'
-                                }}
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right'
-                                }}
-                            >
-                                <MenuItem onClick={handleHide}>Edit</MenuItem>
-                                <MenuItem onClick={handleHide}>Delete</MenuItem>
-                            </Menu>
-                        </Grid> */}
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
@@ -204,7 +186,7 @@ export default function AlertDialog({user}) {
                             <Typography variant="h4">{user.organization_id}</Typography>
                         </Grid>
                     </Grid>
-                </Grid>
+                </Grid> 
                 <Grid item xs={12}>
                     <Grid container spacing={gridSpacing}>
                         <Grid item xs={6}>
@@ -229,16 +211,19 @@ export default function AlertDialog({user}) {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12}>
+                {/* <Grid item xs={12}>
                     <Typography variant="caption">Home Address</Typography>
                     <Typography variant="h4">{user.home_address}</Typography>
-                </Grid>
+                </Grid> */}
             </Grid>
         </Card>
                 </DialogContent>
                 <DialogActions sx={{ pr: 2.5 }}>
                     <Button onClick={handleClose} color="primary">
                         Close
+                    </Button>
+                    <Button color="error" variant="contained" size="small" autoFocus onClick={handleDelete}>
+                        Delete
                     </Button>
                 </DialogActions>
             </Dialog>

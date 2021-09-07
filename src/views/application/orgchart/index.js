@@ -4,7 +4,7 @@ import { makeStyles, useTheme } from '@material-ui/styles';
 
 // Striker Custom
 import TreeClass from './Tree';
-import OrgChartData from './SampleData';
+// import OrgChartData from './SampleData';
 import Child from './child';
 // material-ui
 import { Typography, Grid, List, ListItem, Card, Button } from '@material-ui/core';
@@ -16,26 +16,61 @@ import MuiTypography from '@material-ui/core/Typography';
 import MainCard from 'ui-component/cards/MainCard';
 import TeamMembers from './TeamMembers'
 
+var API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://sdi06-10.staging.dso.mil/api'
+
 // ==============================|| Page: Organization ||============================== //
 
 // <TreeNode label={<div>Production</div>}/>
 const Orgchart = () => {
-    // convert array of sections into a Tree.
-    const orgTree = new TreeClass(OrgChartData.organization);
-    OrgChartData.sections.forEach((section) => {
-        if (section.parent_section_id === 0) {
-            orgTree.addChild(section)
-        } else {
-            orgTree.getNodeById(section.parent_section_id).addChild(section)
-        }
-    })
-
-    // Call function to render the tree.
-    function renderTree(cur) {
-        if (cur.children.length !== 0) {
-            return <Child children={cur.children} users={OrgChartData.users}/>
+    const [data, setData] = useState([])
+    const [users, setUsers] = useState([])
+    useEffect(() => {
+        fetch(`${API_URL}/structure/organization/1`)
+            .then(data => data.json())
+            .then((data) => {
+                setData(data)
+            })
+        fetch(`${API_URL}/users/organization/1`)
+            .then(data => data.json())
+            .then((data) => {
+                setUsers(data)
+            })
+    }, [])
+    
+    function renderOrgChart () {
+        if (Object.keys(data)[0] === "organization" && Object.keys(data)[1] === "sections" && users !== []) {
+            // convert array of sections into a Tree.
+            const orgTree = new TreeClass(data.organization);
+            data.sections.forEach((section) => {
+                if (section.parent_section_id == 0) {
+                    orgTree.addChild(section)
+                } else {
+                    orgTree.getNodeById(Number(section.parent_section_id)).addChild(section)
+                }
+            })
+        
+            // Call function to render the tree.
+            function renderTree(cur) {
+                if (cur.children.length !== 0) {
+                    return <Child children={cur.children} users={users}/>
+                }
+            }
+            return (
+                <Tree lineWidth={'3px'} lineColor={(theme.palette.mode === 'light' ? theme.palette.primary.light : theme.palette.primary.main)} label={<>
+                    <MuiTypography variant="h1" gutterBottom>
+                        {data.organization.name}
+                    </MuiTypography>
+                    <MuiTypography variant="h2" gutterBottom>
+                        {data.organization.location}
+                    </MuiTypography>
+                </>
+                }>
+                    {renderTree(orgTree)}
+                </Tree>
+            )
         }
     }
+
     const theme = useTheme();
     return (
         <Grid container spacing={gridSpacing}>
@@ -43,17 +78,7 @@ const Orgchart = () => {
                 <Grid container spacing={gridSpacing}>
                     <Grid item xs={12} md={12}>
                     <MainCard>
-                    <Tree lineWidth={'3px'} lineColor={(theme.palette.mode === 'light' ? theme.palette.primary.light : theme.palette.primary.main)} label={<>
-                                    <MuiTypography variant="h1" gutterBottom>
-                                        {OrgChartData.organization.name}
-                                    </MuiTypography>
-                                    <MuiTypography variant="h2" gutterBottom>
-                                        {OrgChartData.organization.location}
-                                    </MuiTypography>
-                                </>
-                    }>
-                        {renderTree(orgTree)}
-                    </Tree>
+                        {renderOrgChart()}
                     </MainCard>  
                     </Grid>
                 </Grid>

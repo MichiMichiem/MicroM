@@ -22,6 +22,7 @@ const schedule = {
             type: 'item',
             url: '/calendar',
             icon: icons.IconCalendarStats,
+            disabled: true,
             breadcrumbs: false,
         },
         // {

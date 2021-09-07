@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 // material-ui
 import { Button, Grid, InputAdornment, Menu, MenuItem, OutlinedInput, Pagination, Typography } from '@material-ui/core';
@@ -8,18 +8,19 @@ import UserList from './UserList';
 import MainCard from 'ui-component/cards/MainCard';
 import { gridSpacing } from 'store/constant';
 import AddUserAlert from './AddUserAlert';
-
 import SecondaryAction from 'ui-component/cards/CardSecondaryAction';
 
 // assets
 import { IconSearch } from '@tabler/icons';
 import ExpandMoreRoundedIcon from '@material-ui/icons/ExpandMoreRounded';
 import SampleData from '../../../orgchart/SampleData';
+var API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : 'https://sdi06-10.staging.dso.mil/api'
 
 // ===========================|| USER LIST STYLE 1 ||=========================== //
 
 const ListStylePage1 = () => {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [data, setData] = useState([])
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -27,6 +28,15 @@ const ListStylePage1 = () => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+    
+    useEffect(() => {
+        fetch(`${API_URL}/structure/organization/1`)
+            .then(data => data.json())
+            .then((data) => {
+                setData(data)
+            })
+    }, [])
+
     return (
         <MainCard
             title={
@@ -47,7 +57,7 @@ const ListStylePage1 = () => {
                         />
                     </Grid>
                     <Grid item>
-                       <AddUserAlert/>
+                       <AddUserAlert organization={data.organization} sectionList={data.sections}/>
                     </Grid>
                 </Grid>
             }
